@@ -11,7 +11,15 @@ class TriangleTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function test_getPerimeter() {
-		$this->markTestIncomplete("Implementation missing");
+		$a = 3;
+		$b = 4;
+		$c = 5;
+		$expected = 12;
+
+		$triangle = new Triangle($a, $b, $c);
+		$actual = $triangle->getPerimeter();
+
+		$this->assertEquals($expected, $actual);
 	}
 
 	/**
