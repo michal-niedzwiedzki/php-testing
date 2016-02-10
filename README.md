@@ -62,21 +62,7 @@ Then run PHPUnit `vendor/bin/phpunit`.
 
 **Question:** which method of testing was simpler, manual or automated?
 
-Exercise 2: testing behaviours
-------------------------------
-
-**Objective:** to learn testing both happy and unhappy cases.
-
-In class Triangle modify method `getPerimeter()` to return null if negative length of any side is given.
-Write another method in class `TriangleTest` (e.g. `test_getPerimeter_return_null_when_negative`)
-to check for negative numbers. Use multiple assertions, in total 7 combinations of negative and positive numbers.
-
-Run PHPUnit and correct possible failures.
-Test in browser the old behaviour (positive numbers) as well as the new one (negative numbers).
-
-**Question:** again, which method of testing was simpler, manual or automated?
-
-Exercise 3: using code coverage reports
+Exercise 2: using code coverage reports
 ---------------------------------------
 
 **Objective:** to learn how to use meaningful tests using code coverage report.
@@ -105,6 +91,24 @@ Delete old report and generate it anew:
 
 Then open it in a browser to see updated coverage statistics: `firefox doc/coverage/index.html`
 
+Exercise 3: testing behaviours
+------------------------------
+
+**Objective:** to learn testing both happy and unhappy cases.
+
+In class Triangle modify method `getPerimeter()` to return null if negative length of any side is given.
+
+Generate a coverage report to see which lines of newly written code are not yet covered with tests.
+
+Write another method in class `TriangleTest` (e.g. `test_getPerimeter_return_null_when_negative`)
+to check for negative numbers. Use multiple assertions (`assertNull`), in total 7 combinations
+of negative and positive numbers.
+
+Run PHPUnit and correct possible failures.
+Test in browser the old behaviour (positive numbers) as well as the new one (negative numbers).
+
+**Question:** if you didn't look at coverage report, how would you know what to test?
+
 Exercise 4: getting sick of manual testing
 ------------------------------------------
 
@@ -117,7 +121,8 @@ Generate fresh code coverage report and find the part of class Triangle not cove
 `rm -Rf doc/coverage; vendor/bin/phpunit --coverage-html doc/coverage`
 
 Update tests by writing another method (e.g. `test_getPerimeter_return_null_when_not_a_triangle`) including
-7 combination of values (i.e. 2, 3, 6). Test manually in browser. Also retest all cases from exercise 2.
+3 combination of values (i.e. 2, 3, 6). Test manually in browser. Also, since you've modified the code
+that was previously tested, you will have to retest all cases from previous exercise.
 
 **Question:** did you notice any value of existing unit tests when retesting?
 
@@ -173,6 +178,7 @@ in the future. Let's refactor the model so that exception is thrown in construct
 instantiation is attempted.
 
 To test whether exception is thrown test method should be annotated with `@expectedException Exception`.
+Remember to update `@covers` annotation and rename test methods accordingly.
 
 **Question:** how willing would you be to run all checks manually?
 
@@ -182,7 +188,7 @@ Exercise 7: making a switch to TDD
 **Objective:** introduce "write tests first" approach.
 
 A geometric transformation called scaling needs to be added to class `Triangle`. When method `scale($factor)`
-is called a new instance of `Triangle` should be returned with each of its sides multiplied by $factor.
+is called a new instance of `Triangle` should be returned with each of its sides multiplied by `$factor`.
 
 Write unit test for method `scale` first and run them. Expect failures because of missing method.
 Then implement missing method using failing test as a specification. Resist temptation to change the test
