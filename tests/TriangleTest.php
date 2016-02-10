@@ -9,6 +9,7 @@ class TriangleTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
+	 * @covers Triangle::getPerimeter
 	 */
 	public function test_getPerimeter() {
 		$a = 3;
@@ -24,6 +25,7 @@ class TriangleTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
+	 * @covers Triangle::getArea
 	 */
 	public function test_getArea() {
 		$a = 3;
