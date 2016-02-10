@@ -5,7 +5,7 @@
  */
 class Triangle {
 
-	protected $a, $b, $c;
+	public $a, $b, $c;
 	
 	/**
 	 * Constructor
@@ -43,6 +43,16 @@ class Triangle {
 	public function getArea() {
 		$s = $this->getPerimeter() / 2;
 		return sqrt($s * ($s - $this->a) * ($s - $this->b) * ($s - $this->c));
+	}
+
+	/**
+	 * Return scaled instance of a triangle
+	 *
+	 * @param float $factor
+	 * @return float
+	 */
+	public function scale($factor) {
+		return new Triangle($this->a * $factor, $this->b * $factor, $this->c * $factor);
 	}
 
 }

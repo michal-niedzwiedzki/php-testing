@@ -40,6 +40,19 @@ class TriangleTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
+	 * @covers Triangle::scale
+	 */
+	public function test_scale() {
+		$t1 = new Triangle(3, 4, 5);
+		$t2 = $t1->scale(2);
+		$this->assertEquals(6, $t2->a);
+		$this->assertEquals(8, $t2->b);
+		$this->assertEquals(10, $t2->c);
+		$this->assertNotSame($t1, $t2);
+	}
+
+	/**
+	 * @test
 	 * @covers Triangle::getArea
 	 */
 	public function test_getArea() {
