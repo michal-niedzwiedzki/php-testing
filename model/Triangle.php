@@ -29,6 +29,9 @@ class Triangle {
 		if ($this->a < 0 or $this->b < 0 or $this->c < 0) {
 			return null;
 		}
+		if ($this->a + $this->b <= $this->c or $this->a + $this->c <= $this->b or $this->b + $this->c <= $this->a) {
+			return null;
+		}
 		return $this->a + $this->b + $this->c;
 	}
 

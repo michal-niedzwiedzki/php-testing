@@ -46,6 +46,19 @@ class TriangleTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
+	 * @covers Triangle::getPerimeter
+	 */
+	public function test_getPerimeter_return_null_when_not_a_triangle() {
+		$triangle = new Triangle(2, 3, 6);
+		$this->assertNull($triangle->getPerimeter());
+		$triangle = new Triangle(3, 6, 2);
+		$this->assertNull($triangle->getPerimeter());
+		$triangle = new Triangle(6, 2, 3);
+		$this->assertNull($triangle->getPerimeter());
+	}
+
+	/**
+	 * @test
 	 * @covers Triangle::getArea
 	 */
 	public function test_getArea() {
