@@ -26,6 +26,9 @@ class Triangle {
 	 * @return float
 	 */
 	public function getPerimeter() {
+		if ($this->a < 0 or $this->b < 0 or $this->c < 0) {
+			return null;
+		}
 		return $this->a + $this->b + $this->c;
 	}
 
