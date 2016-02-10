@@ -31,7 +31,10 @@ Server logs will be output to console where you launched the server.
 
 For this training session we will be working with simple model representing a triangle.
 In browser you should see a simple form for entering triangle sides length.
-We will expand the task using testing techniques to develop efficiently.
+We will expand the task in each exercise using various testing techniques.
+
+In case you're stuck with some exercise you can take a peek at or merge with branch *exercise-n*,
+where *n* is exercise number between 1 and 9.
 
 Exercise 0: getting ready
 -------------------------
@@ -188,7 +191,7 @@ Remember to update *@covers* annotation and rename test methods accordingly.
 Exercise 7: making a switch to TDD
 ----------------------------------
 
-**Objective:** introduce "write tests first" approach.
+**Objective:** to introduce "write tests first" approach.
 
 A geometric transformation called scaling needs to be added to class `Triangle`. When method `scale($factor)`
 is called a new instance of `Triangle` should be returned with each of its sides multiplied by `$factor`.
