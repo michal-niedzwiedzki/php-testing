@@ -9,6 +9,15 @@ class ScalingTransformationTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
+	 * @covers ScalingTransformation::__construct
+	 */
+	public function test_construct() {
+		$transformation = new ScalingTransformation(10);
+		$this->assertEquals(10, $transformation->factor);
+	}
+
+	/**
+	 * @test
 	 * @covers ScalingTransformation::transform
 	 */
 	public function test_transform() {

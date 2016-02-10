@@ -7,7 +7,7 @@ require_once "GeometricTransformation.php";
  */
 class ScalingTransformation extends GeometricTransformation {
 
-	protected $factor;
+	public $factor;
 	
 	/**
 	 * Constructor

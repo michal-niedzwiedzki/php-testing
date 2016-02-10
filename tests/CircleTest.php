@@ -10,6 +10,15 @@ class CircleTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 * @covers Circle::__construct
+	 */
+	public function test_construct() {
+		$circle = new Circle(5);
+		$this->assertEquals(5, $circle->radius);
+	}
+
+	/**
+	 * @test
+	 * @covers Circle::__construct
 	 * @expectedException Exception
 	 */
 	public function test_construct_throw_when_negative() {

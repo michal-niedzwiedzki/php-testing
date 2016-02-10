@@ -10,6 +10,15 @@ class SquareTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 * @covers Square::__construct
+	 */
+	public function test_construct() {
+		$square = new Square(5);
+		$this->assertEquals(5, $square->a);
+	}
+
+	/**
+	 * @test
+	 * @covers Square::__construct
 	 * @expectedException Exception
 	 */
 	public function test_construct_throw_when_negative() {

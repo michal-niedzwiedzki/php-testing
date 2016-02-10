@@ -10,6 +10,17 @@ class TriangleTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 * @covers Triangle::__construct
+	 */
+	public function test_construct() {
+		$triangle = new Triangle(3, 4, 5);
+		$this->assertEquals(3, $triangle->a);
+		$this->assertEquals(4, $triangle->b);
+		$this->assertEquals(5, $triangle->c);
+	}
+
+	/**
+	 * @test
+	 * @covers Triangle::__construct
 	 * @dataProvider negativeSides
 	 * @expectedException Exception
 	 */
