@@ -49,7 +49,7 @@ class Triangle {
 	 * Return scaled instance of a triangle
 	 *
 	 * @param float $factor
-	 * @return float
+	 * @return Triangle
 	 */
 	public function scale($factor) {
 		return new Triangle($this->a * $factor, $this->b * $factor, $this->c * $factor);
