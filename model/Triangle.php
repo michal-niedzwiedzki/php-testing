@@ -5,7 +5,7 @@
  */
 class Triangle {
 
-	protected $a, $b, $c;
+	public $a, $b, $c;
 	
 	/**
 	 * Constructor
