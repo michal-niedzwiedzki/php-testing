@@ -8,15 +8,18 @@ The goal of this training is to convince you that automated testing:
 * is much more strict than manual testing
 * is there to help you and your team
 * is a project's asset, not a liability
-* rewards you in the long run
+* rewards you in the long run in quality and stability of the code
 
 We will deal with some of the myths around unit testing, in particular:
 
-* there is not enough time to do automated tests
-* the code needs to be refactored so no need for unit tests
+* there is never enough time to write automated tests
+* the code needs to be refactored so no need for unit tests before nor after that happens
 
 How to begin
 ------------
+
+Make sure you have binary PHP extension `xdebug` installed. If you're running Debian or Ubuntu
+the extension can be installed this way: `sudo apt-get install php5-xdebug`.
 
 1. Clone the repo at https://github.com/stronger/php-testing.git
 2. Enter php-testing directory `cd php-testing`
@@ -36,7 +39,7 @@ Exercise 0: getting ready
 **Objective:** to learn the basic structure of PHPUnit and how to run tests.
 
 Browse tests in `tests/` directory. Note that classes with methods starting with *test*
-or annotated with `@test` will be run automatically when PHPUnit is launched.
+or annotated with *@test* will be run automatically when PHPUnit is launched.
 
 Run PHPUnit `vendor/bin/phpunit`.
 
@@ -75,10 +78,10 @@ Click on Triangle.php link and see the colour coded coverage report.
 
 Did you notice how the constructor is marked in green even though no tests for it exists?
 This is because the testing code executes the constructor, thus making PHPUnit believe
-it's covered. It's a false positive and can be fixed adding @covers annotation in tests.
+it's covered. It's a false positive and can be fixed adding *@covers* annotation in tests.
 
-In for each method in class TriangleTest add @covers annotation with name of method it covers.
-You can use multiple @covers annotations to cover more than one method. Example:
+In for each method in class TriangleTest add *@covers* annotation with name of method it covers.
+You can use multiple *@covers* annotations to cover more than one method. Example:
 
 ```
 /**
@@ -170,17 +173,17 @@ Exercise 6: refactoring with tests
 
 **Objective:** to use unit tests as an indication for refactoring and a safety net.
 
-Notice how in class `Triangle` method `getArea` depends on `getPerimeter` for area calculation.
-By adding extra checks to `getPerimeter` we have affected the behaviour if `getArea`.
+Notice how in class `Triangle` method `getArea()` depends on `getPerimeter()` for area calculation.
+By adding extra checks to `getPerimeter` we have affected the behaviour of `getArea()`.
 
-Indeed, similar checks should be present for `getArea`, but also for other methods that will come
+Indeed, similar checks should be present for `getArea()`, but also for other methods that will come
 in the future. Let's refactor the model so that exception is thrown in constructor when invalid triangle
 instantiation is attempted.
 
 To test whether exception is thrown test method should be annotated with `@expectedException Exception`.
-Remember to update `@covers` annotation and rename test methods accordingly.
+Remember to update *@covers* annotation and rename test methods accordingly.
 
-**Question:** how willing would you be to run all checks manually?
+**Question:** how willing would you be to run all checks manually at this stage?
 
 Exercise 7: making a switch to TDD
 ----------------------------------
@@ -194,7 +197,7 @@ Write unit test for method `scale` first and run them. Expect failures because o
 Then implement missing method using failing test as a specification. Resist temptation to change the test
 to match your implementation.
 
-**Question:** when did you get the idea of what the implementation of new method is going to be?
+**Question:** at what point did you get the idea of what the implementation of new method is going to be?
 
 Exercise 8: refactoring with tests, part 2
 ------------------------------------------
@@ -222,14 +225,13 @@ Test `ScalingTransformation::transform` with the following code:
  * @covers ScalingTransformation::transform
  */
 public function test_transform() {
-	$factor = 10;
-	$transformation = new ScalingTransformation($factor);
+	$transformation = new ScalingTransformation(10);
 
 	$figure = $this->getMock("GeometricFigure");
 	$figure->expects($this->once())
 		->method("scale")
-		->with($this->equalTo($factor))
-		->will($this->returnValue($figure));
+		->with($this->equalTo(10))
+		->will($this->returnValue($this->getMock("GeometricFigure")));
 
 	$transformation->transform($figure);
 }
@@ -241,4 +243,4 @@ should call method `scale` on passed figure. There is no assertions in this test
 Keep running the test and making changes in the model until all tests are passing. Use failing test reports as a guide for
 changing the model.
 
-**Question:** would you like to test recent refactoring manually?
+**Question:** how do you think, why didn't we scale triangle, square or circle and test its sides/radius?
