@@ -1,9 +1,11 @@
 <?php
 
+require_once "GeometricFigure.php";
+
 /**
  * Triangle
  */
-class Triangle {
+class Triangle extends GeometricFigure {
 
 	public $a, $b, $c;
 	
