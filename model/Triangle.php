@@ -15,6 +15,12 @@ class Triangle {
 	 * @param float $c
 	 */
 	public function __construct($a, $b, $c) {
+		if ($a < 0 or $b < 0 or $c < 0) {
+			throw new Exception("Negative sides");
+		}
+		if ($a + $b <= $c or $a + $c <= $b or $b + $c <= $a) {
+			throw new Exception("Sides do not form a triangle");
+		}
 		$this->a = $a;
 		$this->b = $b;
 		$this->c = $c;
@@ -26,12 +32,6 @@ class Triangle {
 	 * @return float
 	 */
 	public function getPerimeter() {
-		if ($this->a < 0 or $this->b < 0 or $this->c < 0) {
-			return null;
-		}
-		if ($this->a + $this->b <= $this->c or $this->a + $this->c <= $this->b or $this->b + $this->c <= $this->a) {
-			return null;
-		}
 		return $this->a + $this->b + $this->c;
 	}
 

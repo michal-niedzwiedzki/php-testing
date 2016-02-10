@@ -9,38 +9,33 @@ class TriangleTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
+	 * @covers Triangle::__construct
+	 * @dataProvider negativeSides
+	 * @expectedException Exception
+	 */
+	public function test_construct_throw_when_negative($a, $b, $c) {
+		$triangle = new Triangle($a, $b, $c);
+		$this->assertNull($triangle->getPerimeter());
+	}
+
+	/**
+	 * @test
+	 * @covers Triangle::__construct
+	 * @dataProvider invalidSides
+	 * @expectedException Exception
+	 */
+	public function test_construct_throw_when_not_a_triangle($a, $b, $c) {
+		$triangle = new Triangle($a, $b, $c);
+		$this->assertNull($triangle->getPerimeter());
+	}
+
+	/**
+	 * @test
 	 * @covers Triangle::getPerimeter
 	 */
 	public function test_getPerimeter() {
-		$a = 3;
-		$b = 4;
-		$c = 5;
-		$expected = 12;
-
-		$triangle = new Triangle($a, $b, $c);
-		$actual = $triangle->getPerimeter();
-
-		$this->assertEquals($expected, $actual);
-	}
-
-	/**
-	 * @test
-	 * @covers Triangle::getPerimeter
-	 * @dataProvider negativeSides
-	 */
-	public function test_getPerimeter_return_null_when_negative($a, $b, $c) {
-		$triangle = new Triangle($a, $b, $c);
-		$this->assertNull($triangle->getPerimeter());
-	}
-
-	/**
-	 * @test
-	 * @covers Triangle::getPerimeter
-	 * @dataProvider invalidSides
-	 */
-	public function test_getPerimeter_return_null_when_not_a_triangle($a, $b, $c) {
-		$triangle = new Triangle($a, $b, $c);
-		$this->assertNull($triangle->getPerimeter());
+		$triangle = new Triangle(3, 4, 5);
+		$this->assertEquals(12, $triangle->getPerimeter());
 	}
 
 	/**
@@ -48,15 +43,8 @@ class TriangleTest extends PHPUnit_Framework_TestCase {
 	 * @covers Triangle::getArea
 	 */
 	public function test_getArea() {
-		$a = 3;
-		$b = 4;
-		$c = 5;
-		$expected = 6;
-
-		$triangle = new Triangle($a, $b, $c);
-		$actual = $triangle->getArea();
-
-		$this->assertEquals($expected, $actual);
+		$triangle = new Triangle(3, 4, 5);
+		$this->assertEquals(6, $triangle->getArea());
 	}
 
 	public function negativeSides() {
