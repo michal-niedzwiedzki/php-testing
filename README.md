@@ -41,13 +41,15 @@ Exercise 0: getting ready
 
 **Objective:** to learn the basic structure of PHPUnit and how to run tests.
 
-1. Browse tests in `tests/` directory. Note that classes with methods starting with *test*
+Browse tests in `tests/` directory. Note that classes with methods starting with *test*
 or annotated with *@test* will be run automatically when PHPUnit is launched.
 
-2. Run PHPUnit `vendor/bin/phpunit`. As a result you should see `I.` - this means the firs
-test is incomplete, and the other is passing. In case of failures detailed report is presented below.
+Run PHPUnit `vendor/bin/phpunit`.
 
-3. To only run specific test you can pass a filter on the command line,
+As a result you should see `I.` - this means the first test is incomplete, and the other
+is passing. In case of failures detailed report is presented below.
+
+To only run specific test you can pass a filter on the command line,
 i.e. `vendor/bin/phpunit --filter getArea`
 
 Exercise 1: getting real with testing
@@ -58,10 +60,11 @@ Exercise 1: getting real with testing
 In class Triangle method `getPerimeter()` returns perimeter equal to the sum of all sides of a triangle,
 method `getArea()` returns area of a triangle using Heron's formula.
 
-1. Take a look at test method `TriangleTest::test_getArea()` and based on it provide implementation
-for yet incomplete test in method `test_getPerimater()`.
+Take a look at test method `TriangleTest::test_getArea()` and based on it provide implementation
+for incomplete test in method `test_getPerimater()`.
 
-2. Test your implementation manually in browser. Then run PHPUnit `vendor/bin/phpunit`.
+Test your implementation manually in browser.
+Then run PHPUnit `vendor/bin/phpunit`.
 
 **Question:** which method of testing was simpler, manual or automated?
 
@@ -70,16 +73,17 @@ Exercise 2: using code coverage reports
 
 **Objective:** to learn how to use meaningful tests using code coverage report.
 
-1. Run PHPUnit with coverage report generation option: `vendor/bin/phpunit --coverage-html doc/coverage`
+Run PHPUnit with coverage report generation option:
+`vendor/bin/phpunit --coverage-html doc/coverage`
 
-2. Open the report in a browser: `firefox doc/coverage/index.html`
+Open the report in a browser: `firefox doc/coverage/index.html`
 Click on Triangle.php link and see the colour coded coverage report.
 
 Did you notice how the constructor is marked in green even though no tests for it exists?
 This is because the testing code executes the constructor, thus making PHPUnit believe
 it's covered. It's a false positive and can be fixed adding *@covers* annotation in tests.
 
-3. In for each method in class TriangleTest add *@covers* annotation with name of method it covers.
+In for each method in class TriangleTest add *@covers* annotation with name of method it covers.
 You can use multiple *@covers* annotations to cover more than one method. Example:
 
 ```
@@ -88,8 +92,9 @@ You can use multiple *@covers* annotations to cover more than one method. Exampl
  */
 ```
 
-4. Delete old report and generate it anew:
+Delete old report and generate it anew:
 `rm -Rf doc/coverage; vendor/bin/phpunit --coverage-html doc/coverage`
+
 Then open it in a browser to see updated coverage statistics: `firefox doc/coverage/index.html`
 
 Exercise 3: testing behaviours
@@ -97,17 +102,16 @@ Exercise 3: testing behaviours
 
 **Objective:** to learn testing both happy and unhappy cases.
 
-1. In class Triangle modify method `getPerimeter()` to return null if negative length of any side is given.
+In class Triangle modify method `getPerimeter()` to return null if negative length of any side is given.
 
-2. Generate a coverage report to see which lines of newly written code are not yet covered with tests.
+Generate a coverage report to see which lines of newly written code are not yet covered with tests.
 
-3. Write another method in class `TriangleTest` (e.g. `test_getPerimeter_return_null_when_negative`)
+Write another method in class `TriangleTest` (e.g. `test_getPerimeter_return_null_when_negative`)
 to check for negative numbers. Use multiple assertions (`assertNull`), in total 7 combinations
 of negative and positive numbers.
 
-4. Run PHPUnit and correct possible failures.
-
-5. Test in browser the old behaviour (positive numbers) as well as the new one (negative numbers).
+Run PHPUnit and correct possible failures.
+Test in browser the old behaviour (positive numbers) as well as the new one (negative numbers).
 
 **Question:** if you didn't look at coverage report, how would you know what to test?
 
@@ -116,17 +120,15 @@ Exercise 4: getting sick of manual testing
 
 **Objective:** to stress the possiblity of manual testing to the limit
 
-1. In class Triangle modify method `getPerimeter()` to check if triangle can be constructed from given sides.
-The rule is that `a+b>c or a+c>b or b+c>a`. Return null when the condition is not satisfied.
+In class Triangle modify method `getPerimeter()` to check if triangle can be constructed from given sides.
+The rule is that `a+b>c and a+c>b and b+c>a`. Return null when the condition is not satisfied.
 
-2. Generate fresh code coverage report and find the part of class Triangle not covered with tests:
+Generate fresh code coverage report and find the part of class Triangle not covered with tests:
 `rm -Rf doc/coverage; vendor/bin/phpunit --coverage-html doc/coverage`
 
-3. Update tests by writing another method (e.g. `test_getPerimeter_return_null_when_not_a_triangle`) including
-3 combination of values (i.e. 2, 3, 6). Test manually in browser.
-
-4. Since you've modified the code that was previously tested, you will have to retest
-all cases from previous exercise.
+Update tests by writing another method (e.g. `test_getPerimeter_return_null_when_not_a_triangle`) including
+3 combination of values (i.e. 2, 3, 6). Test manually in browser. Also, since you've modified the code
+that was previously tested, you will have to retest all cases from previous exercise.
 
 **Question:** did you notice any value of existing unit tests when retesting?
 
@@ -135,7 +137,7 @@ Exercise 5: using data providers
 
 **Objective:** to use declarative programming in testing multiple cases.
 
-1. Write a data provider function in your test, e.g. "negativeSides" that would return array of arrays
+Write a data provider function in your test, e.g. "negativeSides" that would return array of arrays
 with combinations of triangle sides just like asserted in method `test_getPerimeter_return_null_when_negative`:
 
 ```
@@ -148,7 +150,7 @@ public function negativeSides() {
 }
 ```
 
-2. Then make method `test_getPerimeter_return_null_when_negative` accept parameters `($a, $b, $c)`.
+Then make method `test_getPerimeter_return_null_when_negative` accept parameters `($a, $b, $c)`.
 In method doc block annotate it with `@dataProvider negativeSides`:
 
 ```
@@ -164,7 +166,7 @@ public function test_getPerimeter_return_null_when_negative($a, $b, $c) {
 
 The method should assert that getting perimeter of a triangle built using passed parameters should be null.
 
-3. Run PHPUnit and if tests are passing rewrite method `test_getPerimeter_return_null_when_not_a_triangle`
+Run PHPUnit and if tests are passing rewrite method `test_getPerimeter_return_null_when_not_a_triangle`
 to use data provider (e.g. `invalidSides`), too. Run tests again.
 
 **Question:** how much does it cost you to retest all existing cases using PHPUnit?
